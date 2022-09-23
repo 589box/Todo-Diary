@@ -18,7 +18,7 @@
             <h1>ログアウトしました</h1>
         </div>
         <div>
-            <p></p><a href="login.php">ログイン画面へ戻る</a></p>
+            <p><a href="login.php">ログイン画面へ戻る</a></p>
         </div>
     </div>
 </body>
