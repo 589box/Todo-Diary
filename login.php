@@ -1,23 +1,23 @@
 <?php
     include('controller/database.php');
-    
+
     session_start();
-    
+
     $email = "";
     $password = "";
-    
+
     if (isset($_POST["submit"])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        
+
         $pdo = dbConnect();
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        
+
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if (password_verify($password, $result['password'])) {
             $_SESSION['user_id'] = $result['user_id'];
             $_SESSION['name'] = $result['name'];
