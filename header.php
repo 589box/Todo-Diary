@@ -14,6 +14,4 @@
             <?php else:
                 header("Location: login.php"); ?>
             <?php endif; ?>
-    
-    
 </header>
