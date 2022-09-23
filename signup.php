@@ -1,22 +1,22 @@
-<?php 
+<?php
     include('controller/database.php');
 
     $name = "";
     $email = "";
     $hashpass = "";
-    
+
     if (isset($_POST["submit"])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $hashpass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        
+
         $db = dbConnect();
         $sql = 'SELECT COUNT(*) FROM users WHERE email=:email';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($result['COUNT(*)'] == 1) {
             echo "このメールアドレスは既に登録されています";
         } else {
@@ -26,7 +26,7 @@
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashpass);
             $stmt->execute();
-            
+
             header("Location: complete.html");
         }
     }
