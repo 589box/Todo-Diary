@@ -2,17 +2,17 @@
 
     session_start();
     $db = dbConnect();
-    
+
     if (isset($_POST['createtask'])) {
         $newtask = $_POST['newtask'];
         taskCreate($db, $newtask);
     }
-    
+
     if (isset($_POST['deletetask'])) {
         $deletetask = $_POST['task_id'];
         taskDelete($db, $deletetask);
     }
-    
+
     $tasks = tasks($db);
     $posts = diary($db);
 ?>
@@ -30,7 +30,7 @@
     <div>
         <?php include('header.php');?>
     </div>
-	
+
 	<div class="container">
         <div class="column1">
         	<h2>今日のタスク</h2>
@@ -43,7 +43,6 @@
             	        <input type="submit" name="createtask" value="追加">
             	    </form>
             	    </td>
-            	    
         	    </tr>
         	<?php if(count($tasks) == 0): ?>
                 <tr>
@@ -79,7 +78,6 @@
                     <tr class="border">
                         <td class="bordertd"><img class="diaryimg" src="<?= $post['img_path'];?>" alt=""></td>
                     </tr>
-                    
                 <?php endforeach; ?>
             <?php endif; ?>
             </table>
