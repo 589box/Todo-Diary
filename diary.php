@@ -2,14 +2,14 @@
 
     session_start();
     $db = dbConnect();
-    
+
     $editpost = "";
     $img_path = "";
     $edit_id = "";
-    
+
     if (isset($_POST["diarysubmit"])) {
         $post_name = $_POST['diary'];
-        
+
         if (empty($_POST['edit_id'])) {
             if (!empty($_FILES['img']['tmp_name']) && !empty($_FILES['img']['name'])) {
                 $imgname = $_FILES['img']['name'];
@@ -22,20 +22,20 @@
             diaryUpdate($db, $post_name, $editdiary);
         }
     }
-    
+
     if (isset($_POST['editdiary'])) {
         $editdiary = $_POST['diary_id'];
         $edit_id = $_POST['diary_id'];
         $row = diaryEdit($db, $editdiary);
-        
+
         $editpost = $row['post_name'];
     }
-    
+
     if (isset($_POST['deletediary'])) {
         $deletediary = $_POST['diary_id'];
         diaryDelete($db, $deletediary);
     }
-    
+
     $start = "2022-09-01 00:00:00";
     $stop = date("Y-m-d H:i:s");
     if (isset($_POST['between'])) {
@@ -51,7 +51,7 @@
         }
     }
     $posts = diarySearch($db, $start, $stop);
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@
     	<h2>日記</h2>
     	<div>
     	    <form action="" method="post">
-    	        <input type="date" name="start"> ～ 
+    	        <input type="date" name="start"> ～
     	        <input type="date" name="stop">
     	        <input type="submit" name="between" value="検索">
     	    </form>
